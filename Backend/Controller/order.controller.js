@@ -11,7 +11,7 @@ const deliveryCharges=5
 const stripe= new Stripe(process.env.STRIPE_SECRET_KEY)
 
 
-const placeOrder = async (req, res) => {
+const placeOrder = async (req, res,next) => {
     try {
         const {userId,items,amount,address} = req.body
         const neworder = new orderModel({
@@ -37,7 +37,7 @@ const placeOrder = async (req, res) => {
     }
 }
 
-const placeOrderStripe = async (req, res) => {
+const placeOrderStripe = async (req, res,next) => {
     try {
 
          const {userId,items,amount,address} = req.body
@@ -97,7 +97,7 @@ const placeOrderStripe = async (req, res) => {
         next(error)
     }
 }
-const verifyStripe = async (req, res) => {
+const verifyStripe = async (req, res,next) => {
   try {
     const { success, orderId,userId } = req.body;
 
@@ -119,7 +119,7 @@ const verifyStripe = async (req, res) => {
   }
 };
 
-const allOrders = async (req, res) => {
+const allOrders = async (req, res,next) => {
     try {
         const orders= await orderModel.find().sort({date:-1})
         return res.status(200).json({
@@ -133,7 +133,7 @@ const allOrders = async (req, res) => {
     }
 }
 
-const userOrders = async (req, res) => {
+const userOrders = async (req, res,next) => {
     try {
 
         const {userId} = req.body

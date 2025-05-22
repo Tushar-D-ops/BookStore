@@ -1,5 +1,5 @@
 import UserModel from "../models/userModel.js";
-export const addToCart = async (req, res) => {
+export const addToCart = async (req, res,next) => {
   try {
     const {userId,itemId} = req.body
     if(!userId || !itemId){
@@ -30,7 +30,7 @@ export const addToCart = async (req, res) => {
   }
 }
 
-export const updateCart = async (req, res) => {
+export const updateCart = async (req, res,next) => {
      try {
             const {userId,itemId,quantity} = req.body
             const userData= await UserModel.findById(userId)
@@ -48,7 +48,7 @@ export const updateCart = async (req, res) => {
 }
 
 
-export const getUserCart = async (req, res) => {
+export const getUserCart = async (req, res,next) => {
   try {
          const {userId} = req.body
             const userData= await UserModel.findById(userId)
