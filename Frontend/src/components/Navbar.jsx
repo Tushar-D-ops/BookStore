@@ -10,7 +10,7 @@ const Navbar = ({containerStyles,toggleMenu,menuOpened}) => {
   const navItems=[
     {to:"/",label:"Home", icon:<TbHomeFilled/>},
     {to:"/shop",label:"Shop", icon:<IoLibrary/>},
-    {to:"mailto:info@alaca.com",label:"Contact", icon:<IoMailOpen/>},
+    {to:"/contact",label:"Contact", icon:<IoMailOpen/>},
 
   ]
   return (

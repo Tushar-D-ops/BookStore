@@ -11,6 +11,7 @@ import connectCloudinary from './config/cloudinary.js';
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoutes.js"
 // import { authenticateToken } from './utilities.js';
+import nodemailer from "nodemailer"
 
 const app = express();
 app.use(cors())
@@ -48,6 +49,39 @@ app.use((err,req,res,next)=>{
 
 app.get("/", (req, res) => {
   res.send("Backend is working!");
+});
+
+
+
+app.post("/api/contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail", // or "Outlook", "Yahoo"
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    await transporter.sendMail({
+      from: email,
+      to: process.env.EMAIL, // your email to receive messages
+      subject: `Contact Form: ${subject}`,
+      html: `
+        <h3>New Contact Request</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong><br/> ${message}</p>
+      `
+    });
+
+    res.status(200).json({ success: true, message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Email sending error:", error);
+    res.status(500).json({ success: false, message: "Failed to send email." });
+  }
 });
 
 

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion,AnimatePresence } from 'framer-motion'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useEffect } from 'react'
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true)
@@ -11,6 +12,15 @@ const Login = () => {
   const[password,setPassword] = useState('')
 
   const {token,setToken,navigate,backend_url} = useContext(ShopContext)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+  
 
 
   const handleSubmit = async(e) => {
@@ -73,7 +83,173 @@ const Login = () => {
     transition={{ duration: 0.5,delay:0.2 }}
     
     className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="relative w-full max-w-4xl h-70vh  bg-white overflow-hidden rounded-xl shadow-xl shadow-slate-500 flex">
+
+      {isMobile? 
+      (
+
+      <div className="min-h-screen w-full flex flex-col items-center gap-3 justify-center bg-gray-100 p-4">
+        <AnimatePresence mode="wait">
+  {isLogin ? (
+    <motion.div
+      key="login"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="relative z-10 text-center p-6 flex flex-col justify-center items-center gap-4 bg-secondary w-full rounded-xl max-w-md"
+    >
+      <div className="relative">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4086/4086679.png"
+          alt="Welcome Icon"
+          className="w-16 h-16 mx-auto animate-bounce opacity-90 z-10 relative"
+        />
+        <div className="absolute top-1 left-1 w-16 h-16 bg-white/10 rounded-full blur-2xl z-0" />
+      </div>
+
+      <h2 className="text-4xl font-extrabold tracking-wider text-white drop-shadow-md max-sm:text-2xl">
+        Welcome Back!
+      </h2>
+
+      <blockquote className="italic text-sm text-white/80 mt-4 border-l-4 border-white/30 pl-3 max-w-xs mx-auto">
+        “Books are a uniquely portable magic.”
+      </blockquote>
+
+      <div className="relative w-24 h-[2px] bg-white/30 mt-4 mb-2 rounded-full overflow-hidden">
+        <div className="absolute inset-0 animate-pulse bg-white/70 blur-sm w-1/3" />
+      </div>
+    </motion.div>
+  ) : (
+    <motion.div
+      key="signup"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="relative z-10 text-center p-6 flex flex-col justify-center items-center gap-4 bg-secondary w-full rounded-xl max-w-md"
+    >
+      <div className="relative">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4086/4086679.png"
+          alt="Welcome Icon"
+          className="w-16 h-16 mx-auto animate-bounce opacity-90 z-10 relative"
+        />
+        <div className="absolute top-1 left-1 w-16 h-16 bg-white/10 rounded-full blur-2xl z-0" />
+      </div>
+
+      <h2 className="text-4xl font-extrabold tracking-wider text-white drop-shadow-md max-sm:text-2xl">
+        Hello, Friend!
+      </h2>
+
+      <blockquote className="italic text-sm text-white/80 mt-4 border-l-4 border-white/30 pl-3 max-w-xs mx-auto">
+        “A reader lives a thousand lives before he dies.”
+      </blockquote>
+
+      <div className="relative w-24 h-[2px] bg-white/30 mt-4 mb-2 rounded-full overflow-hidden">
+        <div className="absolute inset-0 animate-pulse bg-white/70 blur-sm w-1/3" />
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+        
+      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
+        <AnimatePresence mode="wait">
+          {isLogin ? (
+            <motion.div
+              key="login"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col gap-4"
+            >
+              <h2 className="text-2xl font-bold text-center">Login</h2>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="p-2 border rounded"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="p-2 border rounded"
+              />
+              <button
+                onClick={handleSubmit}
+                className="bg-[#452372] text-white py-2 rounded hover:bg-purple-900 transition"
+              >
+                Login
+              </button>
+              <p className="text-center text-sm text-gray-600">
+                New here?{' '}
+                <span
+                  className="text-secondary font-semibold cursor-pointer"
+                  onClick={() => setIsLogin(false)}
+                >
+                  Sign up
+                </span>
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="signup"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col gap-4"
+            >
+              <h2 className="text-2xl font-bold text-center">Sign Up</h2>
+              <input
+                type="text"
+                placeholder="Name"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+                className="p-2 border rounded"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="p-2 border rounded"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="p-2 border rounded"
+              />
+              <button
+                onClick={handleSubmit}
+                className="bg-[#452372] text-white py-2 rounded hover:bg-purple-900 transition"
+              >
+                Sign Up
+              </button>
+              <p className="text-center text-sm text-gray-600">
+                Already a user?{' '}
+                <span
+                  className="text-secondary font-semibold cursor-pointer"
+                  onClick={() => setIsLogin(true)}
+                >
+                  Login
+                </span>
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+)
+    :(
+
+<div className="relative w-full max-w-4xl h-70vh  bg-white overflow-hidden rounded-xl shadow-xl shadow-slate-500 flex">
 
         
         <div className="w-full flex transition-transform duration-700 ease-in-out" >
@@ -166,6 +342,11 @@ const Login = () => {
 </div>
 
       </div>
+
+    )
+      
+    }
+      
     </motion.div>
   )
 }
