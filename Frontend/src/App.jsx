@@ -10,6 +10,7 @@ import Cart from './pages/Cart'
 import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Verify from './pages/Verify'
+import BookDetails from './pages/BookDetails'
 import { Scroll } from 'lucide-react'
 import ScrollToTop from './components/ScrollToTop'
 import { ToastContainer } from 'react-toastify'
@@ -18,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   return (
-    <main className='overflow-hidden bg-primary'>
+    <main className='overflow-hidden bg-gradient-to-br from-[#ecded7] via-[#fbe6e0] to-[#efaaa4]'>
       <ToastContainer/>
       <ScrollToTop/>
         <Routes>
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/place-order" element={<PlaceOrder />} />
             <Route path="/Orders" element={<Orders />} />
             <Route path='/verify' element={<Verify />} />
+            <Route path="/book/:id" element={<BookDetails />} />
 
             
 

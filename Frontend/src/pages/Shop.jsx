@@ -73,7 +73,7 @@ const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
 
   return (
     
-    <section className='max-padd-container bg-white'>
+    <section className='max-padd-container bg-gradient-to-br from-[#fffdfc] via-[#fbe6e0] to-[#e2857d]'>
       <Header/>
       <div className='pt-28'>
         <div className='w-full flexCenter'>
@@ -106,7 +106,7 @@ const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
             <motion.label 
             initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5,delay:i*0.2 }}
+          transition={{ duration: 0.5,delay:i*0.1 }}
             
             key={cat.name}>
               <input value={cat.name} onChange={(e)=>toggleFilter(e.target.value,setCategory)} type="checkbox" className='hidden peer' />
@@ -126,7 +126,7 @@ const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
             <motion.div 
             initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5,delay: 1 }}
+          transition={{ duration: 0.5,delay: 0.6 }}
             
             >
             <Title
@@ -139,7 +139,7 @@ const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
       <motion.div
       initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5,delay: 1.4 }}
+          transition={{ duration: 0.5,delay: 0.7 }}
       
       className='flexCenter gap-x-2'>
         <span className='hidden sm:flex medium medium-16'>Sort By:</span>
@@ -153,7 +153,7 @@ const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
           <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5,delay: 1.6 }}
+          transition={{ duration: 0.5,delay: 0.8 }}
           className={getPaginatedBooks().length>0 ? `mt-10 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12`:"max-padd-container py-20 h-[50vh] text-center"}>
             {getPaginatedBooks().length>0 ?
             (

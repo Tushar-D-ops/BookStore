@@ -11,6 +11,7 @@ import {Autoplay, Pagination,Navigation} from 'swiper/modules';
 
 import Item from './Item';
 import { ShopContext } from '../context/ShopContext';
+import { Link } from 'react-router-dom';
 
 
 const NewArrivals = () => {

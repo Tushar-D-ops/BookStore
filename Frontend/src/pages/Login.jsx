@@ -4,15 +4,26 @@ import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true)
   const[username,setUserName] = useState('')
   const[email,setEmail] = useState('')
   const[password,setPassword] = useState('')
+  
 
   const {token,setToken,navigate,backend_url} = useContext(ShopContext)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  const location = useLocation();
+const from = location.state?.from || '/';
+
+useEffect(() => {
+  if (token) {
+    navigate(from, { replace: true });
+  }
+}, [token]);
 
 useEffect(() => {
   const handleResize = () => setIsMobile(window.innerWidth <= 768);

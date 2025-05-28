@@ -12,17 +12,21 @@ import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 const Cart = () => {
 
-    const { books, navigate, currency, cartItems,updateQuantity,totalAmount,userCart } = useContext(ShopContext)
+    const { books, navigate, currency, cartItems,updateQuantity,totalAmount,userCart,token } = useContext(ShopContext)
     
     useEffect(() => {
         userCart();
-      }, []);
+        if (!token) {
+      navigate('/login', { state: { from: location.pathname }, replace: true })
+    }
+      }, [token]);
 
+      
 
     return (
         <>
         <Header/>
-        <section className='max-padd-container'>
+        <section className='max-padd-container '>
             <div className='pt-28'>
                 <motion.div
                 initial={{opacity:0, y:50}}
@@ -36,7 +40,7 @@ const Cart = () => {
                     titleSyles={"h3"}
                 />
                 </motion.div>
-                <div className='mt-6'>
+                <div className='mt-6  p-5 rounded-3xl'>
                     {books.map((item,i) => {
                         if (cartItems[item._id] > 0) {
                             return (
@@ -44,7 +48,7 @@ const Cart = () => {
                                 
                                 initial={{opacity:0, y:50}}
                                  animate={{opacity:1, y:0}}
-                                 transition={{duration:0.5,delay:i*0.05}}
+                                 transition={{duration:0.5,delay:i*0.03}}
                                 
                                 key={item._id} className='bg-white p-2 mt-3 rounded-lg shadow-md shadow-slate-400'>
                                     <div className='flex gap-x-3'>
@@ -75,7 +79,7 @@ const Cart = () => {
 
                 </div>
                 <div className='flex mt-20'>
-                    <div className='w-full sm:w-[450px]'>
+                    <div className='w-full sm:w-[450px]  p-6 rounded-2xl  '>
                         <CartTotal/>
                         <motion.div
                         initial={{opacity:0, y:50}}

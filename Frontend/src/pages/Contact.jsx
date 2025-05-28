@@ -28,13 +28,13 @@ const Contact = () => {
   };
 
   return (
-    <>
+    <div className='max-padd-container'>
       <Header />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-xl mx-auto mt-24 p-8 bg-white shadow-xl rounded-2xl"
+        className="max-w-xl mx-auto mt-24 p-8  shadow-xl rounded-2xl"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Contact Us</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -86,7 +86,7 @@ const Contact = () => {
         <p className="mt-4 text-center text-sm text-gray-600">{status}</p>
       </motion.div>
       <Footer />
-    </>
+    </div>
   );
 };
 

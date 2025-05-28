@@ -35,8 +35,8 @@ const Login = ({setToken}) => {
   
 
   return (
-    <div className='flex items-center justify-center h-screen bg-primary'>
-     <div className={` p-10 flex flex-col justify-center bg-white rounded-2xl`}>
+    <div className='w-full flex items-center justify-center h-screen bg-primary'>
+     <div className={`text-2xl p-10 flex flex-col justify-center bg-white rounded-2xl`}>
             <h2 className="text-2xl font-bold mb-6 text-secondary">Admin - Login</h2>
             <form onSubmit={handleSubmit} className="flex flex-col">
             <input type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} className="mb-4 p-2 border rounded" />
