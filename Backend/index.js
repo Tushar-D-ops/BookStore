@@ -60,14 +60,14 @@ app.post("/api/contact", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail", // or "Outlook", "Yahoo"
       auth: {
-        user: process.env.EMAIL,
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       }
     });
 
     await transporter.sendMail({
       from: email,
-      to: process.env.EMAIL, // your email to receive messages
+      to: process.env.EMAIL_USER, // your email to receive messages
       subject: `Contact Form: ${subject}`,
       html: `
         <h3>New Contact Request</h3>
