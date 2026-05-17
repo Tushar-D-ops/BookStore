@@ -14,7 +14,7 @@ import nodemailer from "nodemailer"
 const app = express();
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL],
+  origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL,'https://book-store-xi-three.vercel.app','https://book-store-admin-two.vercel.app'],
   credentials: true,
 }))
 
