@@ -60,7 +60,7 @@ const PlaceOrder = () => {
         console.log(orderData)
         switch (method) {
           case 'cod':
-            const response= await axios.post(backend_url + "/api/order/place",orderData,{headers:{token}})
+            const response= await axios.post(backend_url + "/api/order/place",orderData)
             if(response.data.success){
               toast.success(response.data.message)
               setCartItems({})
@@ -71,7 +71,7 @@ const PlaceOrder = () => {
             }
             break;
             case 'stripe':
-            const stripeResponse= await axios.post(backend_url + "/api/order/stripe",orderData,{headers:{token}})
+            const stripeResponse= await axios.post(backend_url + "/api/order/stripe",orderData)
             if(stripeResponse.data.success){
               const {session_url}=stripeResponse.data
               window.location.replace(session_url)

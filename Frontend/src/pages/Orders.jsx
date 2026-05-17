@@ -21,7 +21,7 @@ const Orders = () => {
             if(!token){
                 return null
             }
-            const response= await axios.post(backend_url + "/api/order/userorders",{},{headers:{token}})
+            const response= await axios.post(backend_url + "/api/order/userorders",{})
             console.log(response)
             if(response.data.success){
                 let allOrdersItem=[]

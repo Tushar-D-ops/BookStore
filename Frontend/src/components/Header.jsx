@@ -26,13 +26,16 @@ const Header = () => {
 
   }
 
-  const handleLogout = () => {
-    setToken("")
-    localStorage.removeItem("token")
-    setCartItems({})
-    setRightbarOpened(false)
-    // navigate("/login")
+  const handleLogout = async () => {
+  try {
+    await axios.post(backend_url + "/api/user/logout")
+  } catch (error) {
+    console.log(error)
   }
+  setToken(false)
+  setCartItems({})
+  setRightbarOpened(false)
+}
 
   useEffect(() => {
     const handleScroll = () => {

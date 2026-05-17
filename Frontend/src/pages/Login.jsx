@@ -33,57 +33,39 @@ useEffect(() => {
 
   
 
+const handleSubmit = async (e) => {
+  e.preventDefault()
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
-
-    if(isLogin){
-
-
-      try {
-        const response =await axios.post(backend_url + "/api/user/signin",{email,password})
-        if(response.data.success){
-          setToken(response.data.token)
-          localStorage.setItem("token",response.data.token)
-          navigate('/')
-          toast.success(response.data.message)
-        }
-        else{
-          console.log(response.data.message)
-          toast.error(response.data.message)
-        }
-      
+  if(isLogin){
+    try {
+      const response = await axios.post(backend_url + "/api/user/signin", { email, password })
+      if(response.data.success){
+        setToken(true)
+        navigate('/')
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
     } catch (error) {
       if(error.response?.data?.message){
         toast.error(error.response.data.message)
       }
-      
     }
-
-    }
-    else{
-
-
-      try {
-        const response = await axios.post(backend_url + "/api/user/signup",{username,email,password})
-        if(response.data.success){
-          setToken(response.data.token)
-          localStorage.setItem("token",response.data.token)
-          navigate('/')
-          toast.success(response.data.message)
-        }
-        else{
-          console.log(response.data.message)
-          toast.error(response.data.message)
-        }
-      
+  } else {
+    try {
+      const response = await axios.post(backend_url + "/api/user/signup", { username, email, password })
+      if(response.data.success){
+        setToken(true)
+        navigate('/')
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
     } catch (error) {
       if(error.response?.data?.message){
         toast.error(error.response.data.message)
       }
-
     }
-    
   }
 }
 
